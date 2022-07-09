@@ -5,6 +5,7 @@
  */
 package Dato;
 import java.sql.*;
+import java.sql.Connection;
 
 /**
  *
@@ -20,7 +21,6 @@ public class ConexionDB {
     String user;
     String pass;
     Connection conexion;
-    String Hola;
     Statement sentencia = null;
         
 
@@ -31,7 +31,6 @@ public class ConexionDB {
         user = "grupo03sc";
         pass = "grup003grup003";
         conexion = null;
-        Hola = "Hola Diana";
     }
 
     public void conectarBD(){
@@ -43,6 +42,18 @@ public class ConexionDB {
         }
     }
     
+    public Connection getConnection() {
+        try {
+            Class.forName(driver);
+            conexion = (Connection) DriverManager.getConnection(url, user, pass);
+        } catch (Exception e) {
+            System.out.println("Error al conectar la bd " + e);
+        }
+        return conexion;
+    }
+    
+
+
     public void desconectarBD(){
         try {
             conexion.close();
