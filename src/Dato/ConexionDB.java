@@ -20,6 +20,7 @@ public class ConexionDB {
     String user;
     String pass;
     Connection conexion;
+    String Hola;
     Statement sentencia = null;
         
 
@@ -30,6 +31,7 @@ public class ConexionDB {
         user = "grupo03sc";
         pass = "grup003grup003";
         conexion = null;
+        Hola = "Hola Diana";
     }
 
     public void conectarBD(){
