@@ -118,7 +118,7 @@ public class ConexionDB {
                 System.out.println("");
             }
         } catch (Exception e) {
-            System.out.println("No se logro realizar la consulta" + e.getMessage());
+            System.out.println("No se logro realizar la consulta " + e.getMessage());
         }
 //        try {
 //            db.conectarBD();
