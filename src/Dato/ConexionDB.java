@@ -83,7 +83,7 @@ public class ConexionDB {
      * 
      * @param args 
      */
-    
+    //Si
     public ResultSet consultaBD(String consulta) throws Exception{
         ResultSet resultado;
         try {
