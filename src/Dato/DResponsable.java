@@ -5,6 +5,10 @@
  */
 package Dato;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
 /**
  *
  * @author Vanessa
@@ -36,4 +40,40 @@ public class DResponsable {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+    
+        public boolean registrar(){
+        PreparedStatement ps = null;
+//        conexion = new ConexionDB();
+        Connection connection = conexion.getConection();
+        String query = "INSERT INTO responsable (cod_adm, nombre) VALUES (?, ?)";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setString(1, cod_adm);
+            ps.setString(2, nombre);
+            ps.execute();
+            conexion.desconectarBD();
+            return true;
+        } catch (SQLException e) {
+            System.out.println("No se registro " + e);
+            return false;
+        } 
+    }
+    
+    public boolean eliminar(){
+        PreparedStatement ps = null;
+        conexion = new ConexionDB();
+        Connection connection = conexion.getConection();
+        String query = "DELETE FROM responsable WHERE cod_adm = ?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setString(1, cod_adm);
+            ps.execute();
+            conexion.desconectarBD();
+            return true;
+        } catch (SQLException e) {
+            System.out.println("No se elimino " + e);
+            return false;
+        }
+    }
+
 }

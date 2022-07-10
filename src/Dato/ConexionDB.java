@@ -6,6 +6,8 @@
 package Dato;
 import java.sql.*;
 import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
 
 /**
  *
@@ -42,7 +44,7 @@ public class ConexionDB {
         }
     }
     
-    public Connection getConnection() {
+    public Connection getConexion() {
         try {
             Class.forName(driver);
             conexion = (Connection) DriverManager.getConnection(url, user, pass);
