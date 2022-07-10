@@ -5,6 +5,10 @@
  */
 package Dato;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
 /**
  *
  * @author Diana Montano
@@ -95,6 +99,89 @@ public class DInmueble {
 
     public void setId_grupo_fk(int id_grupo_fk) {
         this.id_grupo_fk = id_grupo_fk;
+    }
+    
+    public boolean registrar(){
+        PreparedStatement ps = null;
+        conexion = new ConexionDB();
+        Connection connection = conexion.getConection();
+        String query = "INSERT INTO inmueble (codigo, descripcion, cod_asignacion, tipo, id_usuario_fk, id_responsable_fk, id_estado_fk, id_direccion_fk, id_grupo_fk) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setString(1, codigo);
+            ps.setString(2, descripcion);
+            ps.setString(3, cod_asignacion);
+            ps.setString(4, tipo);
+            ps.setString(5, id_usuario_fk);
+            ps.setString(6, id_responsable_fk);
+            ps.setInt(7, id_estado_fk);
+            ps.setInt(8, id_direccion_fk);
+            ps.setInt(9, id_grupo_fk);
+            ps.execute();
+            conexion.desconectarBD();
+            return true;
+        } catch (SQLException e) {
+            System.out.println("No se registro " + e);
+            return false;
+        } 
+    }
+    
+    public boolean modificar(){
+        PreparedStatement ps = null;
+        conexion = new ConexionDB();
+        Connection connection = conexion.getConection();
+        String query = "UPDATE inmueble set descripcion = ?, tipo = ?  WHERE codigo = ?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setString(1, descripcion);
+            ps.setString(2, tipo);
+            ps.setString(3, codigo);
+            ps.executeUpdate();
+            conexion.desconectarBD();
+            return true;
+        } catch (SQLException e) {
+            System.out.println("No se registro " + e);
+            return false;
+        } 
+    }
+    
+    public boolean eliminar(){
+        PreparedStatement ps = null;
+        conexion = new ConexionDB();
+        Connection connection = conexion.getConection();
+        String query = "DELETE FROM inmueble WHERE codigo = ?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setString(1, codigo);
+            ps.execute();
+            conexion.desconectarBD();
+            return true;
+        } catch (SQLException e) {
+            System.out.println("No se elimino " + e);
+            return false;
+        }
+    }
+    
+    public static void main(String[] args) {
+        
+        DInmueble inmueble = new DInmueble();
+        /*
+        inmueble.codigo = "U0117A01C0114";
+        inmueble.descripcion = "EDIFICIO REPUBL. DE 4 PLANTAS CON 2180.87 M2. CONSTRUIDOS. UBICADO FRENTE A LA PLAZA 24 DE SEPTIEMBRE EQUINA JUNIN. MZNO. 7 NRO. INMUEBLE 610324";
+        inmueble.cod_asignacion = "6896";
+        inmueble.tipo = "A";
+        inmueble.id_usuario_fk = "9039006";
+        inmueble.id_responsable_fk = "9039";
+        inmueble.id_estado_fk = 1;
+        inmueble.id_direccion_fk = 1;
+        inmueble.id_grupo_fk = 1;
+        */
+        inmueble.codigo = "U0117A01C0114";
+        inmueble.descripcion = "EDIFICIO REPUBL. DE 4 PLANTAS CON 2180.87 M2. CONSTRUIDOS. UBICADO FRENTE A LA PLAZA 24 DE SEPTIEMBRE EQUINA JUNIN. MZNO. 7 NRO. INMUEBLE 610324";
+        inmueble.tipo = "A";
+        
+        System.out.println(inmueble.modificar());
+//        System.out.println(inmueble.registrar());
     }
     
     

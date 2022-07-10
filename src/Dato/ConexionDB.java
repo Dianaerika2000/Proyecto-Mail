@@ -52,6 +52,11 @@ public class ConexionDB {
         return conexion;
     }
     
+    public Connection getConection(){
+        conectarBD();
+        return conexion;
+    }
+    
 
 
     public void desconectarBD(){
