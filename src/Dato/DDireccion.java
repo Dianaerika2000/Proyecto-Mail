@@ -106,8 +106,9 @@ public class DDireccion {
     
     public boolean modificar() {
         PreparedStatement ps = null;
-        Connection con = conexion.getConexion();
-
+        conexion = new ConexionDB();
+        Connection con = conexion.getConection();
+        
         String sql = "UPDATE direccion SET ubicacion = ?, lugar = ?, oficina = ?, latitud = ?, longitud = ? WHERE Id = ?";
 
         try {
@@ -134,8 +135,9 @@ public class DDireccion {
     
     public boolean eliminar() {
         PreparedStatement ps = null;
-        Connection con = conexion.getConexion();
-
+        conexion = new ConexionDB();
+        Connection con = conexion.getConection();
+        
         String sql = "DELETE FROM direccion WHERE Id = ?";
 
         try {
@@ -183,8 +185,9 @@ public class DDireccion {
                 + "\n";
 
         try {
-            String query = "SELECT direccion.Id, direccion.ubicacion FROM direccion";
-            Connection con = conexion.getConexion();
+            String query = "SELECT direccion.Id, direccion.ubicacion, direccion.lugar, direccion.oficina, direccion.latitud, direccion.longitud FROM direccion";
+            conexion = new ConexionDB();
+            Connection con = conexion.getConection();
             consulta = con.createStatement();
             resultado = consulta.executeQuery(query);
             ResultSetMetaData rsmd = resultado.getMetaData();

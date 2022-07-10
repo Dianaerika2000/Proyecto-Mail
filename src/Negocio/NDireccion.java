@@ -33,7 +33,7 @@ public class NDireccion {
                                 dDirec.setLatitud(latitud);
                                 dDirec.setLongitud(longitud);
                                 if (dDirec.registrar()) {
-                                    respuesta = dDirec.
+                                    respuesta = dDirec.listar("Se registro Correctamente la Direccion.");
                                 } else {
                                     respuesta = "No se pudo registrar la direccion";
                                 }
@@ -54,6 +54,7 @@ public class NDireccion {
             }
         } else {
             respuesta = "Ingrese un id que no sea nulo";
-        } 
+        }
+        return respuesta;
     }
 }
