@@ -134,7 +134,28 @@ public class DUsuario {
             return false;
         } 
     }
-    
+    public boolean existe(String ci){
+        PreparedStatement ps = null;
+        conexion = new ConexionDB();
+        Connection connection = conexion.getConection();
+        ResultSet resultado = null;
+        String query = "SELECT * FROM usuario WHERE ci = ?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setString(1, ci);
+            resultado = ps.executeQuery();
+            if (resultado.next()) {
+                connection.close();
+                return true;
+            } else {
+                connection.close();
+                return false;
+            }
+        } catch (SQLException e) {
+            System.err.println(e);
+            return false;
+        }
+    }
     
     public String listar(String mensaje){
         conexion = new ConexionDB();
