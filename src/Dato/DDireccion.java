@@ -8,7 +8,9 @@ package Dato;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  *
@@ -151,6 +153,67 @@ public class DDireccion {
             }
         }
     }
+    
+    public String listar(String mensaje) {
+        String tabla = "";
+        Statement consulta;
+        ResultSet resultado = null;
+        tabla = "Content-Type: text/html; charset=\"UTF-8\"\n"
+                + "\n"
+                + "<h3>" + mensaje + "</h3>\n"
+                + "\n"
+                + "<h1>DIRECCIONES: </h1>"
+                + "<table style=\"border-collapse: collapse; width: 100%; border: 2px solid black;\">\n"
+                + "\n"
+                + "  <tr>\n"
+                + "\n"
+                + "    <th style = \"text-align: left; padding: 8px; background-color: #c96969; color: white; border: 1px solid red;\">ID</th>\n"
+                + "\n"
+                + "    <th style = \"text-align: left; padding: 8px; background-color: #c96969; color: white; border: 1px solid red;\">UBICACION</th>\n"
+                + "\n"
+                + "    <th style = \"text-align: left; padding: 8px; background-color: #c96969; color: white; border: 1px solid red;\">LUGAR</th>\n"
+                + "\n"
+                + "    <th style = \"text-align: left; padding: 8px; background-color: #c96969; color: white; border: 1px solid red;\">OFICINA</th>\n"
+                + "\n"
+                + "    <th style = \"text-align: left; padding: 8px; background-color: #c96969; color: white; border: 1px solid red;\">LATITUD</th>\n"
+                + "\n"
+                + "    <th style = \"text-align: left; padding: 8px; background-color: #c96969; color: white; border: 1px solid red;\">LONGITUD</th>\n"
+                + "\n"
+                + "  </tr>\n"
+                + "\n";
+
+        try {
+            String query = "SELECT direccion.Id, direccion.ubicacion FROM direccion";
+            Connection con = conexion.getConexion();
+            consulta = con.createStatement();
+            resultado = consulta.executeQuery(query);
+            ResultSetMetaData rsmd = resultado.getMetaData();
+            int cantidadColumnas = rsmd.getColumnCount();
+            while (resultado.next()) {
+                tabla = tabla
+                        + "  <tr>\n"
+                        + "\n";
+                for (int i = 0; i < cantidadColumnas; i++) {
+                    tabla = tabla
+                            + "    <td style = \"text-align: left; padding: 8px; border: 1px solid red;\">" + resultado.getString(i + 1) + "</td>\n"
+                            + "\n";
+                }
+                tabla = tabla
+                        + "  </tr>\n"
+                        + "\n";
+            }
+            tabla = tabla
+                    + "\n"
+                    + "</table>";
+            consulta.close();
+
+            con.close();
+        } catch (SQLException e) {
+            tabla = "No se pudieron listar los datos.";
+        }
+        return tabla;
+    }
+    
     
     
         public boolean existe(int id) {
