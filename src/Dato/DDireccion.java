@@ -263,7 +263,7 @@ public static void main(String[] args) {
         */
         
         //System.out.println(inmueble.modificar());
-        System.out.println(direccion.registrar());
+        //System.out.println(direccion.registrar());
     }
 
 }
