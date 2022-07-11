@@ -86,7 +86,7 @@ public class NInmueble {
                 respuesta = "El inmueble que quiere eliminar no existe.";
             }
         } else {
-            respuesta = "No se permite dato nulo";
+            respuesta = "No se permite dato nulo.";
         }
         return respuesta;
     }

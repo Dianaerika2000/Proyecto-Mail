@@ -14,8 +14,9 @@ import java.net.*;
 public class ClienteSMTP {
     String servidor="mail.tecnoweb.org.bo";
     //String servidor="172.20.172.254";
-    String user_receptor="grupo21sa@tecnoweb.org.bo";
-    String user_emisor="dianaerika.montano16@gmail.com";
+    String user_receptor = "dianaerika.montano16@gmail.com";
+    String user_receptor2 = "she.is.vane.vane@gmail.com";
+    String user_emisor="grupo03sc@tecnoweb.org.bo";
     String line;
     String comando="";
     int puerto=25;
