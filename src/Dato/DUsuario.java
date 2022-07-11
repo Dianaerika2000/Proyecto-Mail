@@ -119,13 +119,14 @@ public class DUsuario {
         PreparedStatement ps = null;
         conexion = new ConexionDB();
         Connection connection = conexion.getConection();
-        String query = "UPDATE usuario set nombre = ?, apellido = ?, correo = ? WHERE ci = ?";
+        String query = "UPDATE usuario set cod_adm = ?, nombre = ?, apellido = ?, correo = ? WHERE ci = ?";
         try {
             ps = connection.prepareStatement(query);
-            ps.setString(1, nombre);
-            ps.setString(2, apellido);
-            ps.setString(3, correo);
-            ps.setString(4, ci);
+            ps.setString(1, cod_adm);
+            ps.setString(2, nombre);
+            ps.setString(3, apellido);
+            ps.setString(4, correo);
+            ps.setString(5, ci);
             ps.executeUpdate();
             conexion.desconectarBD();
             return true;

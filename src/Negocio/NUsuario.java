@@ -72,9 +72,10 @@ public class NUsuario {
         return respuesta;
     }
     
-    public String modificar(String ci, String nombre, String apellido, String correo){
+    public String modificar(String ci, String cod_adm, String nombre, String apellido, String correo){
         if (dUsuario.existe(ci)) {
             dUsuario.setCi(ci);
+            dUsuario.setCod_adm(cod_adm);
             dUsuario.setNombre(nombre);
             dUsuario.setApellido(apellido);
             dUsuario.setCorreo(correo);
